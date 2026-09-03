@@ -26,17 +26,23 @@ export function registerReverseDnsLookup(server: FastMCP) {
         ips: ipsString,
       });
 
+      const resolvedCount = Object.values(result).filter(
+        (hostnames) => Array.isArray(hostnames) && hostnames.length > 0
+      ).length;
+
       const formattedResult = {
         "Reverse DNS Resolutions": Object.entries(result).map(
           ([ip, hostnames]) => ({
             "IP Address": ip,
             Hostnames:
-              hostnames.length > 0 ? hostnames : ["No hostnames found"],
+              Array.isArray(hostnames) && hostnames.length > 0
+                ? hostnames
+                : ["No hostnames found"],
           })
         ),
         Summary: {
           "Total IPs Queried": args.ips.length,
-          "IPs with Results": Object.keys(result).length,
+          "IPs with Results": resolvedCount,
           "Queried IP Addresses": args.ips,
         },
       };
