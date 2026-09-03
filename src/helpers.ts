@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UserError } from "fastmcp";
+import type { ShodanSsl } from "./types.js";
 
 export const API_BASE_URL = "https://api.shodan.io";
 export const CVEDB_API_URL = "https://cvedb.shodan.io";
@@ -79,4 +80,43 @@ export function getCvssSeverity(score: number): string {
   if (score >= 4.0) return "Medium";
   if (score >= 0.1) return "Low";
   return "None";
+}
+
+function formatCertSerial(serial: number | string | undefined): string {
+  if (serial == null) return "Unknown";
+  if (typeof serial === "string") return serial;
+  // Shodan sends large serials as integers; by the time they arrive through
+  // JSON parsing the low-order digits may already be lost. Render as a plain
+  // decimal string (no scientific notation); use the SHA-256 fingerprint for
+  // exact matching.
+  try {
+    return BigInt(serial).toString();
+  } catch {
+    return String(serial);
+  }
+}
+
+export function formatSslSummary(ssl: ShodanSsl) {
+  const cert = ssl.cert || {};
+  return {
+    "Subject CN": cert.subject?.CN || "Unknown",
+    "Issuer CN": cert.issuer?.CN || "Unknown",
+    Serial: formatCertSerial(cert.serial),
+    "SHA-256 Fingerprint": cert.fingerprint?.sha256 || "Unknown",
+    "Signature Algorithm": cert.sig_alg || "Unknown",
+    "Public Key": cert.pubkey?.type
+      ? `${cert.pubkey.type} ${cert.pubkey.bits || "?"}-bit`
+      : "Unknown",
+    Issued: cert.issued || "Unknown",
+    Expires: cert.expires || "Unknown",
+    Expired: cert.expired ? "Yes" : "No",
+    "TLS Versions": (ssl.versions || []).filter(
+      (version) => !version.startsWith("-")
+    ),
+    Cipher: ssl.cipher?.name
+      ? `${ssl.cipher.name} (${ssl.cipher.bits || "?"}-bit)`
+      : "Unknown",
+    JARM: ssl.jarm || "Not available",
+    JA3S: ssl.ja3s || "Not available",
+  };
 }
