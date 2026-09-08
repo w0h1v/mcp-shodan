@@ -3,7 +3,7 @@
   "name": "@burtthecoder/mcp-shodan",
   "version": "1.0.30",
   "description": "A Model Context Protocol server for Shodan API queries.",
-  "mcpName": "io.github.BurtTheCoder/shodan",
+  "mcpName": "io.github.w0h1v/shodan",
   "main": "build/index.js",
   "bin": {
     "mcp-shodan": "build/index.js"
@@ -27,7 +27,7 @@
     "README.md",
     "LICENSE"
   ],
-  "author": "BurtTheCoder",
+  "author": "w0h1v",
   "license": "MIT",
   "repository": {
     "type": "git",

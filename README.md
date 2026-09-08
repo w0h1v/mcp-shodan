@@ -65,7 +65,7 @@ If you prefer to run from source or need to modify the code:
 
 1. Clone and build:
 ```bash
-git clone https://github.com/BurtTheCoder/mcp-shodan.git
+git clone https://github.com/w0h1v/mcp-shodan.git
 cd mcp-shodan
 npm install
 npm run build
