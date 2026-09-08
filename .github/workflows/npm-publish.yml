@@ -20,9 +20,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Configure Git
@@ -43,8 +43,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to NPM
+      - name: Publish to NPM (trusted publishing via OIDC)
         if: success()
-        run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm --version
+          npm publish --access public
