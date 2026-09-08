@@ -278,6 +278,7 @@ The server includes comprehensive error handling for:
 
 ## Version History
 
+- v1.0.30: Fixed `reverse_dns_lookup` crash on IPs without PTR records, added SSL/TLS certificate details to `ip_lookup` output, pinned axios below 1.14.1 — first npm release since v1.0.22
 - v1.0.22: Published to the [official MCP Registry](https://registry.modelcontextprotocol.io) — added `server.json` manifest, CLI install support for Claude Code, Codex, and Gemini CLI
 - v1.1.0: Migrated from raw `@modelcontextprotocol/sdk` to [FastMCP](https://github.com/punkpeye/fastmcp) — modular tool files, automatic schema validation, simplified error handling
 - v1.0.12: Added reverse DNS lookup and improved output formatting
