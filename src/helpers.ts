@@ -102,14 +102,16 @@ export function formatSslSummary(ssl: ShodanSsl) {
     "Subject CN": cert.subject?.CN || "Unknown",
     "Issuer CN": cert.issuer?.CN || "Unknown",
     Serial: formatCertSerial(cert.serial),
-    "SHA-256 Fingerprint": cert.fingerprint?.sha256 || "Unknown",
+    "SHA-256 Fingerprint":
+      cert.fingerprint?.sha256 || ssl.chain_sha256?.[0] || "Unknown",
     "Signature Algorithm": cert.sig_alg || "Unknown",
     "Public Key": cert.pubkey?.type
       ? `${cert.pubkey.type} ${cert.pubkey.bits || "?"}-bit`
       : "Unknown",
     Issued: cert.issued || "Unknown",
     Expires: cert.expires || "Unknown",
-    Expired: cert.expired ? "Yes" : "No",
+    Expired:
+      cert.expired == null ? "Unknown" : cert.expired ? "Yes" : "No",
     "TLS Versions": (ssl.versions || []).filter(
       (version) => !version.startsWith("-")
     ),
