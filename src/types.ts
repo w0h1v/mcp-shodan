@@ -3,7 +3,7 @@ export interface DnsResponse {
 }
 
 export interface ReverseDnsResponse {
-  [ip: string]: string[];
+  [ip: string]: string[] | null;
 }
 
 export interface SearchLocation {
