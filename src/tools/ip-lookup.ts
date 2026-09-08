@@ -1,6 +1,6 @@
 import { FastMCP } from "fastmcp";
 import { z } from "zod";
-import { queryShodan } from "../helpers.js";
+import { queryShodan, formatSslSummary } from "../helpers.js";
 import type { ShodanService } from "../types.js";
 
 export function registerIpLookup(server: FastMCP) {
@@ -46,6 +46,11 @@ export function registerIpLookup(server: FastMCP) {
                     Server: service.http.server,
                     Title: service.http.title,
                   },
+                }
+              : {}),
+            ...(service?.ssl
+              ? {
+                  SSL: formatSslSummary(service.ssl),
                 }
               : {}),
           };

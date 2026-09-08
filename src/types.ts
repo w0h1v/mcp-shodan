@@ -52,6 +52,56 @@ export interface SearchResponse {
   total: number;
 }
 
+export interface ShodanSslCert {
+  sig_alg?: string;
+  issued?: string;
+  expires?: string;
+  expired?: boolean;
+  version?: number;
+  serial?: number | string;
+  fingerprint?: {
+    sha1?: string;
+    sha256?: string;
+  };
+  subject?: Record<string, string>;
+  issuer?: Record<string, string>;
+  pubkey?: {
+    type?: string;
+    bits?: number;
+  };
+  extensions?: Array<{
+    critical?: boolean;
+    name: string;
+    data?: string;
+  }>;
+}
+
+export interface ShodanSsl {
+  versions?: string[];
+  alpn?: string[];
+  ja3s?: string;
+  jarm?: string;
+  cipher?: {
+    version?: string;
+    bits?: number;
+    name?: string;
+  };
+  trust?: {
+    revoked?: boolean;
+    browser?: unknown;
+  };
+  chain_sha256?: string[];
+  chain?: string[];
+  dhparams?: {
+    bits?: number;
+    generator?: number;
+    fingerprint?: string;
+    prime?: string;
+    public_key?: string;
+  };
+  cert?: ShodanSslCert;
+}
+
 export interface ShodanService {
   port: number;
   transport: string;
@@ -60,6 +110,7 @@ export interface ShodanService {
     server?: string;
     title?: string;
   };
+  ssl?: ShodanSsl;
   cloud?: {
     provider: string;
     service: string;

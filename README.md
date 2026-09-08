@@ -104,6 +104,7 @@ npm run build
   * IP Information (address, organization, ISP, ASN)
   * Location (country, city, coordinates)
   * Services (ports, protocols, banners)
+  * SSL/TLS details per service (certificate subject/issuer CN, serial, SHA-256 fingerprint, validity, TLS versions, cipher, JARM, JA3S) — certificate SAN hostnames appear in the top-level Hostnames/Domains
   * Cloud Provider details (if available)
   * Associated hostnames and domains
   * Tags
