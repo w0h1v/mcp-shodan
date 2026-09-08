@@ -3,15 +3,15 @@
   "name": "io.github.BurtTheCoder/shodan",
   "description": "MCP server for Shodan API — device search, IP lookup, DNS, and CVE/CPE queries.",
   "repository": {
-    "url": "https://github.com/BurtTheCoder/mcp-shodan",
+    "url": "https://github.com/w0h1v/mcp-shodan",
     "source": "github"
   },
-  "version": "1.0.22",
+  "version": "1.0.30",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@burtthecoder/mcp-shodan",
-      "version": "1.0.22",
+      "version": "1.0.30",
       "transport": {
         "type": "stdio"
       },

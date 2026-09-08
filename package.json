@@ -31,7 +31,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BurtTheCoder/mcp-shodan.git"
+    "url": "git+https://github.com/w0h1v/mcp-shodan.git"
   },
   "keywords": [
     "mcp",
@@ -45,7 +45,7 @@
     "shodan-integraton"
   ],
   "bugs": {
-    "url": "https://github.com/BurtTheCoder/mcp-shodan/issues"
+    "url": "https://github.com/w0h1v/mcp-shodan/issues"
   },
-  "homepage": "https://github.com/BurtTheCoder/mcp-shodan#readme"
+  "homepage": "https://github.com/w0h1v/mcp-shodan#readme"
 }
