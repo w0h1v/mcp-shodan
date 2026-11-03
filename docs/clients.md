@@ -78,9 +78,3 @@ Run the server as a standalone HTTP service with `MCP_TRANSPORT=httpStream`. See
 
 !!! warning
     The HTTP transport has no authentication. Don't expose the port beyond localhost without an authenticating reverse proxy, or anyone who can reach it can spend your query credits.
-
-## Smithery
-
-```sh
-npx -y @smithery/cli install @burtthecoder/mcp-shodan --client claude
-```
