@@ -6,12 +6,12 @@
     "url": "https://github.com/w0h1v/mcp-shodan",
     "source": "github"
   },
-  "version": "1.0.34",
+  "version": "1.0.35",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@burtthecoder/mcp-shodan",
-      "version": "1.0.34",
+      "version": "1.0.35",
       "transport": {
         "type": "stdio"
       },

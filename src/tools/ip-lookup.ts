@@ -9,7 +9,7 @@ export function registerIpLookup(server: FastMCP) {
     description:
       "Retrieve comprehensive information about an IP address, including geolocation, operating system, open ports, running services (product, version, CPE), known vulnerabilities (CVEs), SSL certificates, hostnames, and cloud provider details if available. Returns service banners and HTTP server information when present. Optional history returns historical banners; minify omits banners.",
     parameters: z.object({
-      ip: z.string().ip().describe("The IP address (IPv4 or IPv6) to query."),
+      ip: z.union([z.ipv4(), z.ipv6()]).describe("The IP address (IPv4 or IPv6) to query."),
       history: z
         .boolean()
         .optional()
