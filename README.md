@@ -8,7 +8,6 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
   <img alt="Node 20 or newer" src="https://img.shields.io/badge/node-%E2%89%A520-339933">
   <a href="https://registry.modelcontextprotocol.io"><img alt="MCP Registry" src="https://img.shields.io/badge/MCP-Registry-7c3aed"></a>
-  <a href="https://smithery.ai/server/@burtthecoder/mcp-shodan"><img alt="Smithery" src="https://img.shields.io/badge/Smithery-listed-ff5601"></a>
 </p>
 
 <p align="center">
@@ -62,7 +61,7 @@ codex mcp add shodan --env SHODAN_API_KEY=your-key -- npx -y @burtthecoder/mcp-s
 gemini mcp add -e SHODAN_API_KEY=your-key shodan npx -y @burtthecoder/mcp-shodan
 ```
 
-For Claude Desktop, VS Code, Smithery and running from source, see [Connect a client](docs/clients.md).
+For Claude Desktop, VS Code and running from source, see [Connect a client](docs/clients.md).
 
 Then ask your agent: *"What is exposed on 8.8.8.8, and is CVE-2021-44228 in the KEV catalog?"* More prompts are in [example workflows](docs/examples.md).
 
