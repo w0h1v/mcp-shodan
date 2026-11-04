@@ -1,0 +1,48 @@
+name: Publish to MCP Registry
+
+# Runs after a successful npm publish, and can be started by hand to retry. The
+# registry checks that the npm package at the version in server.json exists and
+# that its mcpName matches, so this waits for npm to show the new version.
+on:
+  workflow_run:
+    workflows: ["Publish to NPM"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write  # GitHub OIDC login for the io.github.<repo owner> namespace
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Wait for the npm version
+        run: |
+          PKG=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./server.json').version")
+          for i in $(seq 1 30); do
+            if npm view "$PKG@$VERSION" version >/dev/null 2>&1; then
+              echo "$PKG@$VERSION is on npm"
+              exit 0
+            fi
+            echo "Waiting for $PKG@$VERSION ($i/30)"
+            sleep 20
+          done
+          echo "::error::$PKG@$VERSION did not appear on npm"
+          exit 1
+
+      - name: Publish to MCP Registry
+        run: |
+          curl -fsSL -o mcp-publisher.tar.gz "https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz"
+          echo "a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc  mcp-publisher.tar.gz" | sha256sum -c -
+          tar xzf mcp-publisher.tar.gz mcp-publisher
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish
