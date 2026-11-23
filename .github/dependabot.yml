@@ -4,6 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
     labels: ["dependencies"]
     groups:
       dev-tools:
@@ -16,6 +18,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
     labels: ["dependencies"]
     groups:
       actions:
@@ -24,6 +28,8 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     labels: ["dependencies"]
     ignore:
       # Odd-numbered Node releases are never LTS, and the "25.x" version pattern
